@@ -53,6 +53,34 @@ Each differential-drive robot is modeled with an elevated, non-reflective horizo
 
 ---
 
+## Simulation Environment Setup
+
+<p align="center">
+  <img src="docs/media/mujoco_setup.png" alt="ArUcoTrackerArena MuJoCo Simulation Rig" width="85%"/>
+  <br>
+  <em>MuJoCo 2 m × 2 m arena setup with dual slanted cameras positioned at (0, ±1.4 m, 2.0 m) with 55° downward pitch.</em>
+</p>
+
+---
+
+## Visual Demos & Telemetry
+
+### 1. Dual-Camera Tracking Simulation
+<p align="center">
+  <img src="docs/media/live_simulation.gif" alt="ArUcoTrackerArena Live Tracking Simulation" width="95%"/>
+  <br>
+  <em>Dual slanted-camera viewport (South & North) showing real-time ArUco detection, metric scale validation, and HUD telemetry.</em>
+</p>
+
+### 2. Live Trajectory & Error Telemetry
+<p align="center">
+  <img src="docs/media/live_telemetry_plot.gif" alt="Live Telemetry and Real-Time Error Plot" width="95%"/>
+  <br>
+  <em>Synchronous Matplotlib dashboard displaying 2D ground truth vs. estimated trajectories (left) and absolute tracking error within the 3 mm bracket (right).</em>
+</p>
+
+---
+
 ## Repository Structure
 
 | Category | File / Module | Description |
