@@ -1,0 +1,83 @@
+<mujoco model="robots12_arena">
+    <compiler angle="degree" coordinate="local"/>
+
+    <option integrator="RK4"
+            timestep="0.002"
+            gravity="0 0 -9.81"/>
+
+    <asset>
+        <!-- Arena Floor Checker Texture -->
+        <texture name="arena_floor_tex"
+                 type="2d"
+                 builtin="checker"
+                 rgb1=".2 .3 .4"
+                 rgb2=".1 .15 .2"
+                 width="512"
+                 height="512"
+                 mark="cross"
+                 markrgb=".8 .8 .8"/>
+
+        <material name="arena_floor_mat"
+                  texture="arena_floor_tex"
+                  texrepeat="5 5"
+                  texuniform="true"/>
+
+        <material name="wall_mat" rgba="0.35 0.35 0.35 1"/>
+
+        <!-- ===================================================== -->
+        <!-- ARUCO ASSETS (Used by included robot files)           -->
+        <!-- Save aruco_0.png and aruco_1.png in the same directory -->
+        <!-- ===================================================== -->
+        <texture name="aruco0_tex" type="2d" file="aruco_0.png"/>
+        <material name="aruco0_mat" texture="aruco0_tex" specular="0" shininess="0"/>
+
+        <texture name="aruco1_tex" type="2d" file="aruco_1.png"/>
+        <material name="aruco1_mat" texture="aruco1_tex" specular="0" shininess="0"/>
+    </asset>
+
+    <visual>
+        <global offwidth="1920" offheight="1080"/>
+        <quality shadowsize="2048"/>
+    </visual>
+
+    <worldbody>
+        <!-- Arena Overhead Lighting -->
+        <light name="arena_light"
+               directional="false"
+               diffuse=".85 .85 .85"
+               specular=".1 .1 .1"
+               pos="0 0 3.0"/>
+
+        <!-- Ground Plane: 2m x 2m working area (half-size = 1m) -->
+        <geom name="arena_floor"
+              type="plane"
+              size="1 1 .25"
+              material="arena_floor_mat"
+              friction="2.0 0.005 0.0001"/>
+
+        <!-- ========================================================= -->
+        <!-- PERIMETER WALLS (Height = 8cm, Thickness = 2cm)           -->
+        <!-- ========================================================= -->
+        <geom name="wall_north" type="box" size="1.02 0.01 0.04" pos="0 1.01 0.04" material="wall_mat"/>
+        <geom name="wall_south" type="box" size="1.02 0.01 0.04" pos="0 -1.01 0.04" material="wall_mat"/>
+        <geom name="wall_east"  type="box" size="0.01 1.00 0.04" pos="1.01 0 0.04" material="wall_mat"/>
+        <geom name="wall_west"  type="box" size="0.01 1.00 0.04" pos="-1.01 0 0.04" material="wall_mat"/>
+
+        <!-- ========================================================= -->
+        <!-- GLOBAL OVERHEAD TRACKING CAMERA                           -->
+        <!-- Default identity orientation looks along -Z (downwards)    -->
+        <!-- ========================================================= -->
+        <camera name="overhead_cam"
+                pos="0 0 2.2"
+                fovy="55"
+                mode="fixed"/>
+
+    </worldbody>
+
+    <!-- ============================================================= -->
+    <!-- ROBOT INCLUSIONS                                              -->
+    <!-- ============================================================= -->
+    <include file="robot1.xml"/>
+    <include file="robot2.xml"/>
+
+</mujoco>

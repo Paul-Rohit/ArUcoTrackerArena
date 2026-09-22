@@ -1,0 +1,101 @@
+<mujocoinclude>
+    <worldbody>
+        <body name="robot1" pos="0 0 0">
+            <freejoint name="robot1_root"/>
+
+            <!-- Robot 1 Third-Person Follow Camera -->
+            <camera name="robot1_tpp_cam"
+                    pos="-0.15 0 0.15"
+                    xyaxes="0 -1 0  0.447 0 0.894"
+                    fovy="60"/>
+
+            <!-- Main Chassis: 9.5cm x 9.5cm x 4.8cm -->
+            <!-- Top surface sits at z = 0.031 + 0.024 = 0.055m -->
+            <geom name="robot1_chassis_geom"
+                  type="box"
+                  size="0.0475 0.0475 0.024"
+                  pos="0 0 0.031"
+                  rgba="0.7 0.7 0.7 1"/>
+
+            <!-- ===================================================== -->
+            <!-- ARUCO TRACKING PLATE                                  -->
+            <!-- 8cm x 8cm plate mounted flush on top of the chassis   -->
+            <!-- ===================================================== -->
+            <!-- robot1.xml -->
+            <geom name="robot1_aruco_plate"
+                  type="box"
+                  size="0.04 0.04 0.0005"
+                  pos="0 0 0.06"
+                  material="aruco0_mat"
+                  contype="0"
+                  conaffinity="0"/>
+
+            <!-- ===================================================== -->
+            <!-- LEFT WHEEL                                            -->
+            <!-- ===================================================== -->
+            <body name="robot1_left_wheel"
+                  pos="-0.02 0.0525 0.031">
+                <joint name="robot1_left_wheel_joint"
+                       type="hinge"
+                       axis="0 1 0"
+                       damping="0.005"/>
+                <geom name="robot1_left_wheel_geom"
+                      type="cylinder"
+                      size="0.031 0.005"
+                      rgba="0.2 0.2 0.2 1"
+                      zaxis="0 1 0"
+                      friction="2.0 0.005 0.0001"/>
+            </body>
+
+            <!-- ===================================================== -->
+            <!-- RIGHT WHEEL                                           -->
+            <!-- ===================================================== -->
+            <body name="robot1_right_wheel"
+                  pos="-0.02 -0.0525 0.031">
+                <joint name="robot1_right_wheel_joint"
+                       type="hinge"
+                       axis="0 1 0"
+                       damping="0.005"/>
+                <geom name="robot1_right_wheel_geom"
+                      type="cylinder"
+                      size="0.031 0.005"
+                      rgba="0.2 0.2 0.2 1"
+                      zaxis="0 1 0"
+                      friction="2.0 0.005 0.0001"/>
+            </body>
+
+            <!-- ===================================================== -->
+            <!-- CASTOR WHEEL                                          -->
+            <!-- ===================================================== -->
+            <body name="robot1_castor_wheel"
+                  pos="0.04 0 0.01">
+                <joint name="robot1_castor_joint"
+                       type="ball"/>
+                <geom name="robot1_castor_geom"
+                      type="sphere"
+                      size="0.01"
+                      rgba="0.5 0.5 0.5 1"
+                      friction="0.005 0.005 0.0001"/>
+            </body>
+
+            <!-- ===================================================== -->
+            <!-- FRONT DIRECTION ARROW (Visual indicator)              -->
+            <!-- ===================================================== -->
+            <body name="robot1_direction_arrow"
+                  pos="0.035 0 0.058">
+                <geom name="robot1_arrow_geom"
+                      type="cylinder"
+                      size="0.005 0.01"
+                      rgba="0.4 0.9 0.1 1"
+                      zaxis="1 0 0"
+                      contype="0" conaffinity="0"/>
+            </body>
+        </body>
+    </worldbody>
+
+    <!-- Actuators -->
+    <actuator>
+        <motor name="robot1_left_motor"  joint="robot1_left_wheel_joint"  gear="1"/>
+        <motor name="robot1_right_motor" joint="robot1_right_wheel_joint" gear="1"/>
+    </actuator>
+</mujocoinclude>
