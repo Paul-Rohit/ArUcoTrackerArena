@@ -214,17 +214,20 @@ python 12_worst_case_stress_test.py
 
 ## Hardware & Simulation Parameters
 
-text
-Arena Envelope          : 2.0 m × 2.0 m working area, 8 cm boundary walls
-Differential Wheels     : Radius r = 0.031 m, Track width L = 0.105 m
-Marker Plate Elevation  : z = 0.0555 m (Ground Truth Plate Top)
-Fiducial Standard       : DICT_4X4_50, IDs 0 and 1
-Nominal Metric Pattern  : 0.064 m (Inner black matrix)
-Camera Configuration    : Dual slanted, 1280 × 720 @ 50 Hz, fovy = 50°
-Rig Coordinates         : (0, -1.4, 2.0) [South], (0, +1.4, 2.0) [North]
-Physics Integrator      : 4th-order Runge-Kutta (RK4), dt = 0.002 s
-
-
+| Subsystem | Parameter | Specification / Value |
+| :--- | :--- | :--- |
+| **Arena Structure** | Working Envelope | 2.0 m × 2.0 m active area |
+| | Boundary Boundaries | 8.0 cm wall height, 2.0 cm thickness |
+| **Differential Drive** | Wheel Radius ($r$) | 0.031 m (31.0 mm) |
+| | Axle Track Width ($L$) | 0.105 m (105.0 mm) |
+| **Fiducial Setup** | Standard & Marker IDs | `cv2.aruco.DICT_4X4_50` (IDs 0 and 1) |
+| | Physical Plate Height ($z$) | 0.0555 m (Ground Truth plate top surface) |
+| | Effective Black Pattern ($L$) | 0.064 m (400 px inner pattern / 500 px texture) |
+| **Vision & Cameras** | Array Configuration | Dual opposing slanted views (`cam_south`, `cam_north`) |
+| | Native Resolution & Rate | 1280 × 720 (16:9 HD) @ 50 Hz vision sub-step |
+| | Field of View & Orientation | $\text{fovy} = 50^\circ$ ($\text{FoV}_x \approx 79.3^\circ$), aimed at origin $(0, 0, 0)$ |
+| | Mount Coordinates | South: `(0, -1.4, 2.0)` \| North: `(0, +1.4, 2.0)` |
+| **MuJoCo Physics** | Solver & Timestep | 4th-order Runge-Kutta (RK4), $dt = 0.002\text{ s}$ (500 Hz) |
 
 ---
 
