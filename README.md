@@ -55,40 +55,30 @@ Each differential-drive robot is modeled with an elevated, non-reflective horizo
 
 ## Repository Structure
 
-
-ArUcoTrackerArena/
-├── #0_check_aruco.py               # Marker asset dimension & ID verifier
-├── 0_gen_ArUco.py                  # ArUco asset generator with 10% quiet-zone padding
-├── 1_bringup_hook.py               # Headless simulation step & renderer smoke test
-├── 2_bringup_live.py               # OpenCV live viewport bring-up
-├── 3_bringup_live_withPlot.py      # Basic live trajectory plotting
-├── 4_bringup_withOdom.py           # Wheel odometry integration
-├── 5_batch_arena_tracker.py        # Offline batch dataset tracker
-├── 6_live_arena_tracker.py         # Baseline single-camera tracker
-├── 7_live_slanted_tracker.py       # Single slanted-view tracker
-├── 8_debug_live_tracker_logger.py  # Tracking state logger & CSV dumper
-├── 9_live_ArUco_tracker.py         # Dual-camera live baseline
-├── 10_debug_live_tracker.py        # Diagnostic overlays & ray visualization
-├── 11_debug_v2.py                  # v2 plane back-projection implementation
-├── 12_worst_case_stress_test.py    # Adversarial stress benchmark with live Matplotlib HUD
-├── 13_test_with_metrics.py         # Headless quantitative accuracy evaluator
-│
-├── camera_layout_sweep.py          # Parametric camera elevation & FOV optimizer
-├── check_dependencies.py           # Runtime verification & requirements generator
-├── ekf2d.py                        # 2D Extended Kalman Filter implementation
-│
-├── aruco_0.png                     # Marker texture for Robot 1 (ID 0)
-├── aruco_1.png                     # Marker texture for Robot 2 (ID 1)
-│
-├── robot1.xml                      # Differential-drive robot model 1
-├── robot2.xml                      # Differential-drive robot model 2
-├── robots12_arena.xml              # Single-camera top-down arena scene
-├── robots12_arena_2cam.xml         # Dual slanted-camera production arena scene
-│
-├── LICENSE                         # Project License
-└── README.md                       # Project Documentation
-
-
+| Category | File / Module | Description |
+| :--- | :--- | :--- |
+| **Marker Pipeline** | `#0_check_aruco.py` | Validates asset dimensions and ArUco ID decoding |
+| | `0_gen_ArUco.py` | Generates 500×500 px textures with 10% quiet-zone padding |
+| **Bringup & Tests** | `1_bringup_hook.py` | Headless physics step and off-screen render smoke test |
+| | `2_bringup_live.py` | OpenCV interactive viewport bringup |
+| | `3_bringup_live_withPlot.py` | Real-time trajectory plotting integration |
+| | `4_bringup_withOdom.py` | Wheel odometry integration and verification |
+| **Trackers (v1 Baseline)** | `5_batch_arena_tracker.py` | Batch dataset tracker for offline evaluations |
+| | `6_live_arena_tracker.py` | Single top-down overhead ArUco tracker |
+| | `7_live_slanted_tracker.py` | Single slanted-view camera tracker |
+| | `8_debug_live_tracker_logger.py`| Pose tracking state logger and CSV telemetry dumper |
+| | `9_live_ArUco_tracker.py` | Dual-camera unconstrained PnP baseline |
+| | `10_debug_live_tracker.py` | Diagnostic ray overlays and optical line visualization |
+| **Trackers (v2 Plane & Rays)** | `11_debug_v2.py` | Constrained plane back-projection tracker |
+| | `12_worst_case_stress_test.py`| Adversarial benchmark with live Matplotlib HUD |
+| | `13_test_with_metrics.py` | Headless quantitative error evaluator |
+| **State Estimation & Tools** | `camera_layout_sweep.py` | Camera position, elevation, and FOV optimizer |
+| | `check_dependencies.py` | Verifies runtime packages and generates `requirements.txt` |
+| | `ekf2d.py` | 2D Extended Kalman Filter for odometry & vision fusion |
+| **Models & Textures** | `robots12_arena_2cam.xml` | Production arena with dual slanted cameras (`cam_south`, `cam_north`) |
+| | `robots12_arena.xml` | Overhead camera arena model |
+| | `robot1.xml`, `robot2.xml` | Differential-drive physical robot definitions |
+| | `aruco_0.png`, `aruco_1.png` | Pre-generated 4×4 marker textures (IDs 0 & 1) |
 
 ---
 
